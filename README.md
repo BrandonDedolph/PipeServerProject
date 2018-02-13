@@ -1,2 +1,1 @@
-# PipeServerProject
-Project 3 for CSCI311
+# CSCI311P3

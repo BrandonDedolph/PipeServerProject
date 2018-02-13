@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/steve/CLionProjects/CSCI311P3/Interface.c
+stdio.h
+-
+errno.h
+-
+stdlib.h
+-
+/usr/include/linux/types.h
+-
+unistd.h
+-
+wait.h
+-
+
+/home/steve/CLionProjects/CSCI311P3/Server.c
+stdio.h
+-
+errno.h
+-
+stdlib.h
+-
+string.h
+-
+unistd.h
+-
+sys/wait.h
+-
+
+/usr/include/linux/types.h
+asm/types.h
+-
+linux/posix_types.h
+-
+
