@@ -1,4 +1,9 @@
-
+/**
+ * @file: serverFunctions.h
+ * @author: Brandon Dedolph
+ * @date: February 14, 2017
+ * CSCI2 Account: cs311118
+ */
 
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
@@ -10,22 +15,27 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-#define NUMBER_OF_GAS_DATA 12   //Number of cars in the file to be read
 #define BUFFER_SIZE 2048        //Max buffer size
 #define PIPE_SIZE 2             //Pipe size
 
-typedef enum { false, true } bool;
-typedef enum { PipeRead, PipeWrite } PipeDirection;
+#define PIPE_READ 0             //Added for readability when using pipes
 
-//Structure declaration for the car information.
-typedef struct
+
+#define PIPE_WRITE 1            //Added for readability when using pipes
+
+
+#define INFILE "gasData"        //File to have the gas data read in from
+
+typedef enum { false, true } bool;
+
+typedef struct //To contain the information for each car
 {
-    char id[8];    //id of vehicle
-    int odometer;  //number of miles on odometer
-    float gallons; //gallons
+    char id[8];
+    int odometer;
+    float gallons;
 }carInfo;
 
-void errcheck(int err)  //Used to check if an error occurred with reading or writing from buffers.
+void errcheck(int err)  //checks if -1 has been returned when reading or writing through pipes
 {
 
     if(err == -1)
@@ -36,7 +46,7 @@ void errcheck(int err)  //Used to check if an error occurred with reading or wri
     }
 }
 
-void clearBuffer(char *input)  //Clears the buffer after use.
+void clearBuffer(char *input)  //Clears the buffer
 {
     int i = 0;
     for(i; i < BUFFER_SIZE; i++)
@@ -44,45 +54,4 @@ void clearBuffer(char *input)  //Clears the buffer after use.
         *(input+i) = '\0';
     }
 }
-
-float getAvg(char *account, const carInfo *recs){
-    float totalOd = 0.0;
-    float totalGal = 0.0;
-    float lastOd;
-
-    for (int i = 0; i < NUMBER_OF_GAS_DATA;  i++){
-
-        if(strcmp(recs[i].id, account) == 0){
-
-            if (recs[i].gallons == 0.0)
-                lastOd = recs[i].odometer;
-            else {
-                totalOd += (recs[i].odometer - lastOd);
-                totalGal += recs[i].gallons;
-                lastOd = recs[i].odometer;
-            }
-        }
-    }
-
-    return totalOd/totalGal;
-
-}
-
-
-void sort(carInfo *car)  //Sorts the array of car structures. using bubble sort
-{
-    int i, j;
-
-    for (i = 0; i < NUMBER_OF_GAS_DATA - 1; i++) {
-        for (j = 0; j < NUMBER_OF_GAS_DATA - i - 1; j++) {
-            if (car[j].odometer > car[j + 1].odometer) {
-                carInfo temp;
-                temp = car[j];
-                car[j] = car[j + 1];
-                car[j + 1] = temp;
-            }
-        }
-    }
-}
-
 #endif //FUNCTIONS_H

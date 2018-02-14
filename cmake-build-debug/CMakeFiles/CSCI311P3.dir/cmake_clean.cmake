@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/CSCI311P3.dir/Interface.c.o"
-  "CMakeFiles/CSCI311P3.dir/Server.c.o"
+  "CMakeFiles/CSCI311P3.dir/interface.c.o"
+  "CMakeFiles/CSCI311P3.dir/server.c.o"
   "CSCI311P3.pdb"
   "CSCI311P3"
 )

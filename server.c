@@ -1,49 +1,69 @@
-//Server program that handles all the operations.
+/**
+ * @file: server.c
+ * @author: Brandon Dedolph
+ * @date: February 14, 2017
+ * CSCI2 Account: cs311118
+ */
 
 #include "serverFunctions.h"
 
+int NumCars = 12;         //To contain the number of cars found in the gas data file
+
+float getAvg(char *, const carInfo *);
+void sort(carInfo *);
+
 int main(int argc, char **argv)
 {
-    char writeBuffer[BUFFER_SIZE];  //Buffer to transfer the written strings through the pipes
-    char readBuffer[BUFFER_SIZE];  //Buffer to transfer the read strings through the pipes
-    carInfo carList[NUMBER_OF_GAS_DATA+1];  //Array of carInfo objects
-    int pipeToServ[2];  //Array that holds the read and write pipe to the server
-    int pipeToInter[2];  //Array that holds the read and write pipe to the interface
-    int writeError;  //Variable to check for errors in written strings
-    int readError;  //Variable to check for errors in read strings
+    char writeBuffer[BUFFER_SIZE];          //Buffer to transfer the written strings through the pipes
+    char readBuffer[BUFFER_SIZE];           //Buffer to transfer the read strings through the pipes
+    int serverPipe[PIPE_SIZE];              //Array that holds the read and write pipe to the server
+    int interfacePipe[PIPE_SIZE];           //Array that holds the read and write pipe to the interface
+    int error;                              //used to check for errors
 
-    FILE *inFile;  //Input file variable
+    FILE *inFile;            //Input file variable
 
-    sscanf(argv[0], "%d", &pipeToServ[0]);  //Creates pipe that communicates to server.
-    sscanf(argv[1], "%d", &pipeToInter[1]);  //Creates pipe that communicates to interface.
+    sscanf(argv[PIPE_READ], "%d", &serverPipe[PIPE_READ]);       //Creates read pipes.
+    sscanf(argv[PIPE_WRITE], "%d", &interfacePipe[PIPE_WRITE]);  //Creates write pipes.
 
-    inFile = fopen("gasData","r");  //Opens file "gasData" for reading
+    inFile = fopen(INFILE,"r");         //Opens file listed in the define function in the header
 
-    int numOfCars = 0;  //Total number of cars being read in the loop
-    int err;  //Error variable while reading the file
-
-    for(int i = 0; !feof(inFile) && i < NUMBER_OF_GAS_DATA; i++)  //Loop to read the carInfo from the file
+    carInfo temp;
+    for(int i = 0; !feof(inFile); i++)  //Loop to read the carInfo from the file
     {
-        err = fscanf(inFile, "%7s %i %f \n", carList[i].id, &carList[i].odometer, &carList[i].gallons);
-        errcheck(err);
-        printf("[%d]:%7s %i %f \n", i, carList[i].id, carList[i].odometer, carList[i].gallons);  //Prints each car instance
-        numOfCars++;
+        error = fscanf(inFile, "%7s %i %f \n", temp.id, &temp.odometer, &temp.gallons);
+        errcheck(error);
+        //NumCars++;
     }
 
-    sort(carList);  //Sorts the records for when list command is called
-    clearBuffer(writeBuffer);  //Clear write buffer for future input
+    close(inFile);
 
-    sprintf(writeBuffer,"The file was added successfully.\n Server can now accept commands.\n");  //String loaded into write buffer
-    writeError = write(pipeToInter[1], writeBuffer, 99);  //write above string to interface
-    errcheck(writeError);  //Error check to make sure string was successfully printed
+    carInfo carList[NumCars];    //Array of carInfo objects
 
-    int Done = 0;
-    while(Done == 0)
+    inFile = fopen(INFILE,"r");
+
+    printf("Input command:\n");
+    for(int i = 0; i < NumCars; i++)  //Loop to read the carInfo from the file
+    {
+        error = fscanf(inFile, "%7s %i %f \n",carList[i].id, &carList[i].odometer, &carList[i].gallons);
+        errcheck(error);
+        printf("element = %d:  id = %s, odometer = %i, gallons = %f \n", i, carList[i].id, carList[i].odometer, carList[i].gallons);
+    }
+
+    close(inFile);
+
+    sort(carList);               //Sorts the records for when list command is called
+    clearBuffer(writeBuffer);    //Clear write buffer for future input
+
+    error = write(interfacePipe[PIPE_WRITE], writeBuffer, 99);  //write above string to interface
+    errcheck(error);  //Error check to make sure string was successfully printed
+
+    bool done = false;
+    while(done == false)
     {
 
-        readError = read(pipeToServ[0], readBuffer, BUFFER_SIZE);
+        error = read(serverPipe[PIPE_READ], readBuffer, BUFFER_SIZE);
         clearBuffer(writeBuffer);
-        errcheck(readError);
+        errcheck(error);
         if(strncmp(readBuffer, "\0", 1) == 0)
         {
             wait(10);
@@ -52,7 +72,7 @@ int main(int argc, char **argv)
         else if(strncmp(readBuffer, "mpg,", 4)== 0 ) // computer avg  for <id>
         {
 
-            char id[8];
+            char id[7];
             float amount;
 
             int i;
@@ -62,19 +82,14 @@ int main(int argc, char **argv)
                 id[j++] = readBuffer[i];
             }
 
-
             clearBuffer(readBuffer);
 
             amount = getAvg(id, carList);
 
-
-            clearBuffer(readBuffer);
-
             //Write account amount to the buffer in the formatted string.
-            clearBuffer(writeBuffer);
             sprintf(writeBuffer,"Average MPG for %s = %f.\n", id, amount);
-            writeError = write(pipeToInter[1], writeBuffer, 99);
-            errcheck(writeError);
+            error = write(interfacePipe[PIPE_WRITE], writeBuffer, 99);
+            errcheck(error);
         }
 
 
@@ -84,35 +99,27 @@ int main(int argc, char **argv)
         {
 
             char id[8];
-            int i;
             int j = 0;
-            for (i = 5; i < 16; i++){
+            for (int i = 5; i < 16; i++){
                 id[j++] = readBuffer[i];
             }
 
 
             clearBuffer(readBuffer);
 
-            int done = 0;
 
-            if(numOfCars == 0)
-            {
-                done = 1;
-            }
-            i=0;
-            int offset = 0;
             //loop through records each to buffer
             clearBuffer(writeBuffer);
-            for(i = 0; (i < numOfCars) && (done != 1); i++)
+            for(int i = 0, offset = 0; i < NumCars; i++)
             {
                 if(strcmp(carList[i].id, id) == 0) {
-                    offset += sprintf(writeBuffer + offset, "[%d]:%7s %i %f\n", i, carList[i].id, carList[i].odometer,
+                    offset += sprintf(writeBuffer + offset, "odometer = %i, gallons = %f\n", carList[i].odometer,
                                       carList[i].gallons);
                 }
             }
             //Write entire buffer
-            writeError = write(pipeToInter[1], writeBuffer, BUFFER_SIZE);
-            errcheck(writeError);
+            error = write(interfacePipe[PIPE_WRITE], writeBuffer, BUFFER_SIZE);
+            errcheck(error);
         }
 
         else if(strncmp(readBuffer, "exit",4) == 0)
@@ -122,20 +129,58 @@ int main(int argc, char **argv)
             //send 1 down the pipe to terminate parent loop.
             clearBuffer(writeBuffer);
             sprintf(writeBuffer, "%d", 1);
-            writeError = write(pipeToInter[1], writeBuffer, 99);
-            errcheck(writeError);
-            Done = 1;
+            error = write(interfacePipe[PIPE_WRITE], writeBuffer, 99);
+            errcheck(error);
+            done = true;
         }
         else
         {
             //Unknown command
             clearBuffer(writeBuffer);
             sprintf(writeBuffer,"Server did not understand the command... \n");
-            writeError = write(pipeToInter[1], writeBuffer, 99);
-            errcheck(writeError);
+            error = write(interfacePipe[PIPE_WRITE], writeBuffer, 99);
+            errcheck(error);
         }
         clearBuffer(readBuffer);
     }
 
     return 0;
+}
+
+float getAvg(char *account, const carInfo *recs){
+    float totalOd = 0.0;
+    float totalGal = 0.0;
+    float lastOd;
+
+    for (int car = 0; car < NumCars;  car++){
+
+        if(strcmp(recs[car].id, account) == 0){
+
+            if (recs[car].gallons == 0.0)
+                lastOd = recs[car].odometer;
+            else {
+                totalOd += (recs[car].odometer - lastOd);
+                totalGal += recs[car].gallons;
+                lastOd = recs[car].odometer;
+            }
+        }
+    }
+
+    return totalOd/totalGal;
+
+}
+
+
+void sort(carInfo *car)  //Sorts the array of car structures. using bubble sort
+{
+    for (int car1 = 0; car1 < NumCars; car1++) {
+        for (int car2 = 0; car2 < NumCars - car1 - 1; car2++) {
+            if (car[car2].odometer > car[car2 + 1].odometer) {
+                carInfo temp;
+                temp = car[car2];
+                car[car2] = car[car2 + 1];
+                car[car2 + 1] = temp;
+            }
+        }
+    }
 }

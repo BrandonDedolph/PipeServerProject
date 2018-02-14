@@ -48,10 +48,10 @@ RM = /opt/clion-2017.3.3/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/steve/CLionProjects/CSCI311P3
+CMAKE_SOURCE_DIR = /home/brandon/CLionProjects/PipeServerProject
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/steve/CLionProjects/CSCI311P3/cmake-build-debug
+CMAKE_BINARY_DIR = /home/brandon/CLionProjects/PipeServerProject/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/steve/CLionProjects/CSCI311P3/cmake-build-debug/CMakeFiles /home/steve/CLionProjects/CSCI311P3/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brandon/CLionProjects/PipeServerProject/cmake-build-debug/CMakeFiles /home/brandon/CLionProjects/PipeServerProject/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/steve/CLionProjects/CSCI311P3/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brandon/CLionProjects/PipeServerProject/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,59 +123,59 @@ CSCI311P3/fast:
 	$(MAKE) -f CMakeFiles/CSCI311P3.dir/build.make CMakeFiles/CSCI311P3.dir/build
 .PHONY : CSCI311P3/fast
 
-Interface.o: Interface.c.o
+interface.o: interface.c.o
 
-.PHONY : Interface.o
-
-# target to build an object file
-Interface.c.o:
-	$(MAKE) -f CMakeFiles/CSCI311P3.dir/build.make CMakeFiles/CSCI311P3.dir/Interface.c.o
-.PHONY : Interface.c.o
-
-Interface.i: Interface.c.i
-
-.PHONY : Interface.i
-
-# target to preprocess a source file
-Interface.c.i:
-	$(MAKE) -f CMakeFiles/CSCI311P3.dir/build.make CMakeFiles/CSCI311P3.dir/Interface.c.i
-.PHONY : Interface.c.i
-
-Interface.s: Interface.c.s
-
-.PHONY : Interface.s
-
-# target to generate assembly for a file
-Interface.c.s:
-	$(MAKE) -f CMakeFiles/CSCI311P3.dir/build.make CMakeFiles/CSCI311P3.dir/Interface.c.s
-.PHONY : Interface.c.s
-
-Server.o: Server.c.o
-
-.PHONY : Server.o
+.PHONY : interface.o
 
 # target to build an object file
-Server.c.o:
-	$(MAKE) -f CMakeFiles/CSCI311P3.dir/build.make CMakeFiles/CSCI311P3.dir/Server.c.o
-.PHONY : Server.c.o
+interface.c.o:
+	$(MAKE) -f CMakeFiles/CSCI311P3.dir/build.make CMakeFiles/CSCI311P3.dir/interface.c.o
+.PHONY : interface.c.o
 
-Server.i: Server.c.i
+interface.i: interface.c.i
 
-.PHONY : Server.i
+.PHONY : interface.i
 
 # target to preprocess a source file
-Server.c.i:
-	$(MAKE) -f CMakeFiles/CSCI311P3.dir/build.make CMakeFiles/CSCI311P3.dir/Server.c.i
-.PHONY : Server.c.i
+interface.c.i:
+	$(MAKE) -f CMakeFiles/CSCI311P3.dir/build.make CMakeFiles/CSCI311P3.dir/interface.c.i
+.PHONY : interface.c.i
 
-Server.s: Server.c.s
+interface.s: interface.c.s
 
-.PHONY : Server.s
+.PHONY : interface.s
 
 # target to generate assembly for a file
-Server.c.s:
-	$(MAKE) -f CMakeFiles/CSCI311P3.dir/build.make CMakeFiles/CSCI311P3.dir/Server.c.s
-.PHONY : Server.c.s
+interface.c.s:
+	$(MAKE) -f CMakeFiles/CSCI311P3.dir/build.make CMakeFiles/CSCI311P3.dir/interface.c.s
+.PHONY : interface.c.s
+
+server.o: server.c.o
+
+.PHONY : server.o
+
+# target to build an object file
+server.c.o:
+	$(MAKE) -f CMakeFiles/CSCI311P3.dir/build.make CMakeFiles/CSCI311P3.dir/server.c.o
+.PHONY : server.c.o
+
+server.i: server.c.i
+
+.PHONY : server.i
+
+# target to preprocess a source file
+server.c.i:
+	$(MAKE) -f CMakeFiles/CSCI311P3.dir/build.make CMakeFiles/CSCI311P3.dir/server.c.i
+.PHONY : server.c.i
+
+server.s: server.c.s
+
+.PHONY : server.s
+
+# target to generate assembly for a file
+server.c.s:
+	$(MAKE) -f CMakeFiles/CSCI311P3.dir/build.make CMakeFiles/CSCI311P3.dir/server.c.s
+.PHONY : server.c.s
 
 # Help Target
 help:
@@ -186,12 +186,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... CSCI311P3"
-	@echo "... Interface.o"
-	@echo "... Interface.i"
-	@echo "... Interface.s"
-	@echo "... Server.o"
-	@echo "... Server.i"
-	@echo "... Server.s"
+	@echo "... interface.o"
+	@echo "... interface.i"
+	@echo "... interface.s"
+	@echo "... server.o"
+	@echo "... server.i"
+	@echo "... server.s"
 .PHONY : help
 
 

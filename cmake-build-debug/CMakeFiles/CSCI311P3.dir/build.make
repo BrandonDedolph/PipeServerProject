@@ -43,10 +43,10 @@ RM = /opt/clion-2017.3.3/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/steve/CLionProjects/CSCI311P3
+CMAKE_SOURCE_DIR = /home/brandon/CLionProjects/PipeServerProject
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/steve/CLionProjects/CSCI311P3/cmake-build-debug
+CMAKE_BINARY_DIR = /home/brandon/CLionProjects/PipeServerProject/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/CSCI311P3.dir/depend.make
@@ -57,67 +57,67 @@ include CMakeFiles/CSCI311P3.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/CSCI311P3.dir/flags.make
 
-CMakeFiles/CSCI311P3.dir/Interface.c.o: CMakeFiles/CSCI311P3.dir/flags.make
-CMakeFiles/CSCI311P3.dir/Interface.c.o: ../Interface.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/steve/CLionProjects/CSCI311P3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/CSCI311P3.dir/Interface.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/CSCI311P3.dir/Interface.c.o   -c /home/steve/CLionProjects/CSCI311P3/Interface.c
+CMakeFiles/CSCI311P3.dir/interface.c.o: CMakeFiles/CSCI311P3.dir/flags.make
+CMakeFiles/CSCI311P3.dir/interface.c.o: ../interface.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/brandon/CLionProjects/PipeServerProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/CSCI311P3.dir/interface.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/CSCI311P3.dir/interface.c.o   -c /home/brandon/CLionProjects/PipeServerProject/interface.c
 
-CMakeFiles/CSCI311P3.dir/Interface.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/CSCI311P3.dir/Interface.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/steve/CLionProjects/CSCI311P3/Interface.c > CMakeFiles/CSCI311P3.dir/Interface.c.i
+CMakeFiles/CSCI311P3.dir/interface.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/CSCI311P3.dir/interface.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/brandon/CLionProjects/PipeServerProject/interface.c > CMakeFiles/CSCI311P3.dir/interface.c.i
 
-CMakeFiles/CSCI311P3.dir/Interface.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/CSCI311P3.dir/Interface.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/steve/CLionProjects/CSCI311P3/Interface.c -o CMakeFiles/CSCI311P3.dir/Interface.c.s
+CMakeFiles/CSCI311P3.dir/interface.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/CSCI311P3.dir/interface.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/brandon/CLionProjects/PipeServerProject/interface.c -o CMakeFiles/CSCI311P3.dir/interface.c.s
 
-CMakeFiles/CSCI311P3.dir/Interface.c.o.requires:
+CMakeFiles/CSCI311P3.dir/interface.c.o.requires:
 
-.PHONY : CMakeFiles/CSCI311P3.dir/Interface.c.o.requires
+.PHONY : CMakeFiles/CSCI311P3.dir/interface.c.o.requires
 
-CMakeFiles/CSCI311P3.dir/Interface.c.o.provides: CMakeFiles/CSCI311P3.dir/Interface.c.o.requires
-	$(MAKE) -f CMakeFiles/CSCI311P3.dir/build.make CMakeFiles/CSCI311P3.dir/Interface.c.o.provides.build
-.PHONY : CMakeFiles/CSCI311P3.dir/Interface.c.o.provides
+CMakeFiles/CSCI311P3.dir/interface.c.o.provides: CMakeFiles/CSCI311P3.dir/interface.c.o.requires
+	$(MAKE) -f CMakeFiles/CSCI311P3.dir/build.make CMakeFiles/CSCI311P3.dir/interface.c.o.provides.build
+.PHONY : CMakeFiles/CSCI311P3.dir/interface.c.o.provides
 
-CMakeFiles/CSCI311P3.dir/Interface.c.o.provides.build: CMakeFiles/CSCI311P3.dir/Interface.c.o
+CMakeFiles/CSCI311P3.dir/interface.c.o.provides.build: CMakeFiles/CSCI311P3.dir/interface.c.o
 
 
-CMakeFiles/CSCI311P3.dir/Server.c.o: CMakeFiles/CSCI311P3.dir/flags.make
-CMakeFiles/CSCI311P3.dir/Server.c.o: ../Server.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/steve/CLionProjects/CSCI311P3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/CSCI311P3.dir/Server.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/CSCI311P3.dir/Server.c.o   -c /home/steve/CLionProjects/CSCI311P3/Server.c
+CMakeFiles/CSCI311P3.dir/server.c.o: CMakeFiles/CSCI311P3.dir/flags.make
+CMakeFiles/CSCI311P3.dir/server.c.o: ../server.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/brandon/CLionProjects/PipeServerProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/CSCI311P3.dir/server.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/CSCI311P3.dir/server.c.o   -c /home/brandon/CLionProjects/PipeServerProject/server.c
 
-CMakeFiles/CSCI311P3.dir/Server.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/CSCI311P3.dir/Server.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/steve/CLionProjects/CSCI311P3/Server.c > CMakeFiles/CSCI311P3.dir/Server.c.i
+CMakeFiles/CSCI311P3.dir/server.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/CSCI311P3.dir/server.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/brandon/CLionProjects/PipeServerProject/server.c > CMakeFiles/CSCI311P3.dir/server.c.i
 
-CMakeFiles/CSCI311P3.dir/Server.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/CSCI311P3.dir/Server.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/steve/CLionProjects/CSCI311P3/Server.c -o CMakeFiles/CSCI311P3.dir/Server.c.s
+CMakeFiles/CSCI311P3.dir/server.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/CSCI311P3.dir/server.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/brandon/CLionProjects/PipeServerProject/server.c -o CMakeFiles/CSCI311P3.dir/server.c.s
 
-CMakeFiles/CSCI311P3.dir/Server.c.o.requires:
+CMakeFiles/CSCI311P3.dir/server.c.o.requires:
 
-.PHONY : CMakeFiles/CSCI311P3.dir/Server.c.o.requires
+.PHONY : CMakeFiles/CSCI311P3.dir/server.c.o.requires
 
-CMakeFiles/CSCI311P3.dir/Server.c.o.provides: CMakeFiles/CSCI311P3.dir/Server.c.o.requires
-	$(MAKE) -f CMakeFiles/CSCI311P3.dir/build.make CMakeFiles/CSCI311P3.dir/Server.c.o.provides.build
-.PHONY : CMakeFiles/CSCI311P3.dir/Server.c.o.provides
+CMakeFiles/CSCI311P3.dir/server.c.o.provides: CMakeFiles/CSCI311P3.dir/server.c.o.requires
+	$(MAKE) -f CMakeFiles/CSCI311P3.dir/build.make CMakeFiles/CSCI311P3.dir/server.c.o.provides.build
+.PHONY : CMakeFiles/CSCI311P3.dir/server.c.o.provides
 
-CMakeFiles/CSCI311P3.dir/Server.c.o.provides.build: CMakeFiles/CSCI311P3.dir/Server.c.o
+CMakeFiles/CSCI311P3.dir/server.c.o.provides.build: CMakeFiles/CSCI311P3.dir/server.c.o
 
 
 # Object files for target CSCI311P3
 CSCI311P3_OBJECTS = \
-"CMakeFiles/CSCI311P3.dir/Interface.c.o" \
-"CMakeFiles/CSCI311P3.dir/Server.c.o"
+"CMakeFiles/CSCI311P3.dir/interface.c.o" \
+"CMakeFiles/CSCI311P3.dir/server.c.o"
 
 # External object files for target CSCI311P3
 CSCI311P3_EXTERNAL_OBJECTS =
 
-CSCI311P3: CMakeFiles/CSCI311P3.dir/Interface.c.o
-CSCI311P3: CMakeFiles/CSCI311P3.dir/Server.c.o
+CSCI311P3: CMakeFiles/CSCI311P3.dir/interface.c.o
+CSCI311P3: CMakeFiles/CSCI311P3.dir/server.c.o
 CSCI311P3: CMakeFiles/CSCI311P3.dir/build.make
 CSCI311P3: CMakeFiles/CSCI311P3.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/steve/CLionProjects/CSCI311P3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable CSCI311P3"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/brandon/CLionProjects/PipeServerProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable CSCI311P3"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CSCI311P3.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -125,8 +125,8 @@ CMakeFiles/CSCI311P3.dir/build: CSCI311P3
 
 .PHONY : CMakeFiles/CSCI311P3.dir/build
 
-CMakeFiles/CSCI311P3.dir/requires: CMakeFiles/CSCI311P3.dir/Interface.c.o.requires
-CMakeFiles/CSCI311P3.dir/requires: CMakeFiles/CSCI311P3.dir/Server.c.o.requires
+CMakeFiles/CSCI311P3.dir/requires: CMakeFiles/CSCI311P3.dir/interface.c.o.requires
+CMakeFiles/CSCI311P3.dir/requires: CMakeFiles/CSCI311P3.dir/server.c.o.requires
 
 .PHONY : CMakeFiles/CSCI311P3.dir/requires
 
@@ -135,6 +135,6 @@ CMakeFiles/CSCI311P3.dir/clean:
 .PHONY : CMakeFiles/CSCI311P3.dir/clean
 
 CMakeFiles/CSCI311P3.dir/depend:
-	cd /home/steve/CLionProjects/CSCI311P3/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/steve/CLionProjects/CSCI311P3 /home/steve/CLionProjects/CSCI311P3 /home/steve/CLionProjects/CSCI311P3/cmake-build-debug /home/steve/CLionProjects/CSCI311P3/cmake-build-debug /home/steve/CLionProjects/CSCI311P3/cmake-build-debug/CMakeFiles/CSCI311P3.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/brandon/CLionProjects/PipeServerProject/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brandon/CLionProjects/PipeServerProject /home/brandon/CLionProjects/PipeServerProject /home/brandon/CLionProjects/PipeServerProject/cmake-build-debug /home/brandon/CLionProjects/PipeServerProject/cmake-build-debug /home/brandon/CLionProjects/PipeServerProject/cmake-build-debug/CMakeFiles/CSCI311P3.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/CSCI311P3.dir/depend
 

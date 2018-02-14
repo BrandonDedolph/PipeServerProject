@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/steve/CLionProjects/CSCI311P3/Interface.c" "/home/steve/CLionProjects/CSCI311P3/cmake-build-debug/CMakeFiles/CSCI311P3.dir/Interface.c.o"
-  "/home/steve/CLionProjects/CSCI311P3/Server.c" "/home/steve/CLionProjects/CSCI311P3/cmake-build-debug/CMakeFiles/CSCI311P3.dir/Server.c.o"
+  "/home/brandon/CLionProjects/PipeServerProject/interface.c" "/home/brandon/CLionProjects/PipeServerProject/cmake-build-debug/CMakeFiles/CSCI311P3.dir/interface.c.o"
+  "/home/brandon/CLionProjects/PipeServerProject/server.c" "/home/brandon/CLionProjects/PipeServerProject/cmake-build-debug/CMakeFiles/CSCI311P3.dir/server.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

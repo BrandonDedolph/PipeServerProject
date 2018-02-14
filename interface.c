@@ -1,91 +1,94 @@
-//Interface program that communicates with user
+/**
+ * @file: interface.c
+ * @author: Brandon Dedolph
+ * @date: February 14, 2017
+ * CSCI2 Account: cs311118
+ */
 
 #include <stdio.h>
 #include "serverFunctions.h"
 
 int main() {
-    int err;
+    int error;
     int Status = 0;
     int writeError, readError;
-    int pipeToServ[2];  //Array that holds the read and write pipe to the server
-    int pipeToInter[2];  //Array that holds the read and write pipe to the interface
-    char args1[50];
-    char args2[50];
-    char ReadBuffer[BUFFER_SIZE + 1];//Input
-    char WriteBuffer[BUFFER_SIZE + 1];
-    int ServerPID;
+    int serverPipe[PIPE_SIZE];  //Array that holds the read and write pipe to the server
+    int interfacePipe[PIPE_SIZE];  //Array that holds the read and write pipe to the interface
+    char argument1[20];
+    char argument2[20];
+    char ReadBuffer[BUFFER_SIZE];//Input
+    char WriteBuffer[BUFFER_SIZE];
+    int processID;
 
     //Create Pipes
-    pipe(pipeToServ);
-    pipe(pipeToInter);
+    pipe(serverPipe);
+    pipe(interfacePipe);
     //fork child process
-    ServerPID = fork();
+    processID = fork();
 
-    errcheck(ServerPID);
+    errcheck(processID);
 
-    if (ServerPID == 0) {
+    if (processID == 0) {
         //in child process
         //Close unused pipe ends
-        close(pipeToServ[1]);
-        close(pipeToInter[0]);
+        close(serverPipe[PIPE_WRITE]);
+        close(interfacePipe[PIPE_READ]);
         //Assign args
-        sprintf(args1, "%d", pipeToServ[0]);
-        sprintf(args2, "%d", pipeToInter[1]);
+        sprintf(argument1, "%d", serverPipe[PIPE_READ]);
+        sprintf(argument2, "%d", interfacePipe[PIPE_WRITE]);
         //Execute Server Program
-        err = execl("./server", args1, args2, NULL);
+        error = execl("./server", argument1, argument2, NULL);
 
-        errcheck(err);
+        errcheck(error);
 
         //DB is initialized.
 
     } else { // in Parent process
         //Close unused pipe ends
-        close(pipeToServ[0]);
-        close(pipeToInter[1]);
+        close(serverPipe[PIPE_READ]);
+        close(interfacePipe[PIPE_WRITE]);
 
-        //Pipes are established
-        //Expecting message from DB with a success.
-        printf("Reading from Server\n\n");
-        readError = read(pipeToInter[0], ReadBuffer, 99);
+        //Reading from the Server
+        readError = read(interfacePipe[PIPE_READ], ReadBuffer, 99);
         printf("Response: %s", ReadBuffer);
         clearBuffer(ReadBuffer);
         errcheck(readError);
 
         //Begin menu loop
-        int Done = 0;
-        while (Done == 0) {
+        bool done = false;
+        while (done == false) {
 
-            printf("Please supply a command( mpg,<id>| list,<id> | exit )\n:");
+            printf("\n:");
 
-            //recieve input from user, send to Server.
+            //receive input from user, send to Server.
             clearBuffer(WriteBuffer);
             scanf("%s", WriteBuffer);
-            writeError = write(pipeToServ[1], WriteBuffer, BUFFER_SIZE);
+            writeError = write(serverPipe[PIPE_WRITE], WriteBuffer, BUFFER_SIZE);
             errcheck(writeError);
 
             //Read Response from DB
-            readError = read(pipeToInter[0], ReadBuffer, BUFFER_SIZE);
+            readError = read(interfacePipe[PIPE_READ], ReadBuffer, BUFFER_SIZE);
             errcheck(readError);
 
             //Check for exit return by Server
             if (atoi(ReadBuffer) == 1) {
-                Done = 1;
+                done = true;
                 clearBuffer(ReadBuffer);
                 sprintf(ReadBuffer, "%s", "Server complete.\n");
                 printf("Response: %s", ReadBuffer);
-                printf("Interface:  child process (%d) completed.\n", ServerPID);
+                printf("Interface:  child process (%d) completed.\n", processID);
                 break;
             }
 
-            printf("Response: \n%s\n", ReadBuffer);
+            printf("Response: \n%s ", ReadBuffer);
 
 
 
             clearBuffer(ReadBuffer);
         }
         //Wait for child process to finish;
-        err = waitpid(-1, &Status, 0);
-        errcheck(err);
+        error = waitpid(-1, &Status, 0);
+        errcheck(error);
 
         printf("Interface:  child process exit status = %d.\n", Status);
         printf("Interface:  Complete.\n");
